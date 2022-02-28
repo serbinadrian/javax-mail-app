@@ -1,0 +1,433 @@
+:root{
+    --main-color: #FFFFFF;
+    --hover-color: #8EB7BD;
+
+    --main-font-color: #353535;
+    --active-font-color: #3EA2EB;
+    --hover-font-color: #18C15C;
+
+    --menu-background: #BAD4D8;
+    --menu-hover: #8EB7BD;
+    --shadow: #B7B7B7;
+
+    --default-margin: 35px;
+    --small-margin: 25px;
+    --tiny-margin: 15px;
+
+    --default-ico-size: 40px;
+    --small-icon-size: 25px;
+    --tiny-icon-size: 15px;
+
+    --default-font-size: 24px;
+    --default-line-size: 24px;
+    --default-font-weight: 500;
+    --small-font-size: 18px;
+    --tiny-font-size: 10px;
+
+}
+
+*{
+    font-family: Montserrat, sans-serif;
+    color: var(--main-font-color);
+    font-weight: var(--default-font-weight);
+    font-size: var(--default-font-size);
+    letter-spacing: 0.05em;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html, main {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+input {
+    padding-left: 15px;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 0;
+}
+
+input:focus{
+    outline: none;
+}
+
+.hide{
+    display: none !important;
+}
+
+nav{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--main-color);
+    box-shadow: 0 0 10px var(--shadow);
+    width: 100%;
+    height: 60px;
+}
+
+.nav-logo-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: var(--default-margin);
+}
+
+.nav-logo{
+    width:  var(--default-ico-size);
+    height:  var(--default-ico-size);
+    margin-right: 15px;
+}
+
+.nav-logo svg{
+    width: 100%;
+    height: 100%;
+}
+
+.app-name,
+.nav-user-section{
+    margin-right: var(--default-margin);
+    height: 30px;
+}
+
+.menu{
+    width: 20%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: var(--menu-background);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-items{
+    margin-top: 100px;
+    width: 100%;
+}
+
+.menu-item{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.menu-item svg{
+    width: 100%;
+    height: 100%;
+}
+
+.menu-item path{
+    fill: var(--main-font-color);
+}
+
+.menu-item:hover, .menu-item:hover div{
+    cursor: pointer;
+    color: var(--hover-font-color);
+}
+
+.menu-item:hover path{
+    fill: var(--hover-font-color);
+}
+
+.menu-item.active{
+    background: var(--main-color);
+    color: var(--active-font-color);
+}
+
+.menu-item-logo{
+    width:  var(--default-ico-size);
+    height:  var(--default-ico-size);
+    margin-right: var(--small-margin);
+    margin-left: var(--default-margin);
+}
+
+.menu-item-name{
+    width: 65px;
+}
+
+.compose-btn{
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border: 2px solid var(--main-font-color);
+    border-radius: 50px;
+    margin: 0 0 var(--small-margin) var(--default-margin);
+}
+
+.compose-btn-logo{
+    width: var(--default-ico-size);
+    height: var(--default-ico-size);
+    margin-right: var(--tiny-margin);
+}
+
+.compose-btn-logo path{
+    fill: var(--main-font-color);
+}
+
+.compose-btn:hover{
+    background: var(--main-color);
+    cursor: pointer;
+}
+
+.content{
+    width: 80%;
+    position: absolute;
+    right: 0;
+    top: 60px;
+}
+
+.display-control{
+    margin-top: 55px;
+}
+
+.display-control-item.active div{
+    color: var(--active-font-color);
+}
+
+.display-control-item.active path{
+    fill: var(--active-font-color);
+}
+
+
+.display-control, .display-control-item{
+    display: flex;
+    flex-wrap: nowrap;
+    margin-left: var(--default-margin);
+    align-items: center;
+}
+
+.display-control-item:hover div{
+    color: var(--hover-font-color);
+}
+
+.display-control-item:hover path{
+    fill: var(--hover-font-color);
+}
+
+.display-control-item-logo{
+    margin-right: var(--tiny-margin);
+    width: var(--default-ico-size);
+    height: var(--default-ico-size);
+}
+
+.display-control-item-logo svg{
+    width: 100%;
+    height: 100%;
+}
+
+.display-control-item-logo path{
+    fill: var(--main-font-color);
+}
+
+.messages{
+    width: 100%;
+    height: 81vh;
+    overflow: auto;
+}
+
+.message{
+    margin: 15px auto;
+    height: 70px;
+    width: 91%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    background: var(--menu-background);
+    border: 2px solid var(--menu-background);
+    transition: .3s ease;
+}
+
+.message:hover{
+    background: var(--menu-hover) !important;
+    transform: scale(1.009);
+    transition: .3s ease;
+}
+
+#sent .message{
+    background: var(--menu-background) !important;
+    border: 2px solid var(--menu-background) !important;;
+}
+
+.message.read{
+    background: white;
+}
+
+.contents-section{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: var(--default-margin);
+    width: 74%;
+}
+
+.data-field{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: '...';
+    display: flex;
+    flex-wrap: nowrap;
+    flex: auto;
+    margin-left: var(--default-margin);
+}
+
+.data-field-name{
+    margin-right: var(--tiny-margin);
+    font-weight: bold;
+}
+
+.date-section{
+    margin-left: auto;
+}
+
+.date-section{
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex: auto;
+    justify-content: space-between;
+}
+
+.date-section div{
+    text-align: center;
+    flex: auto;
+}
+
+.message.read .status-read, .message.unread .status-unread{
+    display: block;
+}
+
+.message.unread .status-read, .message.read .status-unread{
+    display: none;
+}
+
+.message-status{
+   margin: 0 var(--default-margin);
+    width: var(--default-ico-size);
+    height: var(--default-ico-size);
+}
+
+.message-status svg{
+    width: 100%;
+    height: 100%;
+}
+
+.send-modal, .look-modal{
+    width: 700px;
+    height: 700px;
+    padding: 25px;
+    z-index: 6;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--menu-background);
+}
+
+.send-modal h2, .look-modal h2{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.mail-to, .mail-subject{
+    width: 100%;
+    height: 40px;
+    border: 2px solid var(--active-font-color);
+    margin-bottom: 15px;
+    background: var(--main-color);
+}
+
+.mail-body{
+    width: 100%;
+    max-height: 500px;
+    margin-bottom: 15px;
+}
+
+.mail-body textarea{
+    width: 100%;
+    height: 300px;
+    min-height: 250px;
+    max-height: 350px;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+.mail-attachments{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: "...";
+}
+
+.add-new-attachment{
+    width: 50px;
+    height: 50px;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 3px;
+    border: 2px solid var(--active-font-color);
+    margin-bottom: 15px;
+}
+
+.modal-buttons{
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: end;
+}
+
+.modal-buttons button{
+    display: block;
+    margin: 15px;
+    width: 150px;
+    height: 40px;
+    font-size: var(--default-font-size);
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid var(--active-font-color);
+    border-radius: 2px;
+}
+
+.email-message-content{
+    display: none;
+}
+
+@media (max-width: 1200px) {
+    .display-control-item:first-child{
+        margin-left: 0;
+    }
+
+    .compose-btn{
+        transform: scale(0.8);
+        margin: 15px auto;
+    }
+
+    .menu-item, .display-control-item{
+        height: 55px;
+    }
+
+    .menu-item-logo, .message-status, .display-control-item-logo{
+        width: var(--small-icon-size);
+        height: var(--small-icon-size);
+    }
+
+    .message div, .display-control-item div{
+        font-size: var(--small-font-size);
+    }
+
+    .display-control{
+        margin-top: 40px;
+    }
+}
