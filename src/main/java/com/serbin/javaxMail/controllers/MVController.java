@@ -1,0 +1,74 @@
+package com.serbin.javaxMail.controllers;
+
+import com.serbin.javaxMail.configs.EmailConfig;
+import com.serbin.javaxMail.domains.FileMap;
+import com.serbin.javaxMail.domains.User;
+import com.serbin.javaxMail.services.EmailService;
+import com.serbin.javaxMail.services.FileService;
+import com.serbin.javaxMail.services.MailServiceProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+
+import java.util.ArrayList;
+
+
+@Controller
+public class MVController {
+
+    EmailService emailService = new EmailService();
+    FileService fileService = new FileService();
+    EmailConfig emailConfig = new EmailConfig();
+    @Autowired
+    MailServiceProvider mailServiceProvider;
+
+    User user = new User("smokgjas@gmail.com", "user");
+
+    @GetMapping("/")
+    String getHomePage(Model model) {
+        model.addAttribute("user", user);
+        model.addAttribute("inboxMessages", emailService.exportMessages());
+        return "index";
+    }
+
+    @GetMapping("/download/file")
+    public void downloadFile(
+            @RequestParam(value = "file") String fileName,
+            HttpServletResponse response
+    ) {
+        //fileService.getFile(fileName, response);
+    }
+
+
+    @PostMapping("/sendCurrentMail")
+    RedirectView sendMail(@RequestParam(value = "mailTo") String mailTo,
+                          @RequestParam(value = "mailSubject") String mailSubject,
+                          @RequestParam(value = "mailText") String mailText,
+                          @RequestParam(value = "fileField") ArrayList<MultipartFile> files) throws IOException {
+
+        var fileMap = new ArrayList<FileMap>();
+        if (null != files && files.size() > 0) {
+            for (MultipartFile multipartFile : files) {
+                FileMap map = new FileMap();
+                map.setFilename(multipartFile.getOriginalFilename());
+                map.setFileStream(multipartFile);
+                fileMap.add(map);
+            }
+        }
+
+        System.out.println(mailTo);
+        System.out.println(mailSubject);
+        System.out.println(mailText);
+        boolean isSent = mailServiceProvider.sendMail(mailSubject, mailText, mailTo, fileMap);
+        System.out.println(isSent ? "SENT" : "NOT SENT");
+        return new RedirectView("/");
+    }
+}
