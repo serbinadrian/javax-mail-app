@@ -1,0 +1,30 @@
+<div class="message">
+    <form th:action="@{/viewSentMessage/{id}(id=${message.id})}" target="message-view" formmethod="get" class="mform">
+        <div class="contents-section">
+            <div class="data-field from">
+                <div class="data-field-name">
+                    TO:
+                </div>
+                <div class="data-field-value">
+                    <span th:text="${message.to}"></span>
+                </div>
+            </div>
+            <div class="data-field subject">
+                <div class="data-field-name">
+                    SUBJECT:
+                </div>
+                <div class="data-field-value">
+                    <span th:text="${message.subject}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="date-section">
+            <div class="day">
+                <span th:text="${message.dateDay}"></span>
+            </div>
+            <div class="time">
+                <span th:text="${message.dateTime}"></span>
+            </div>
+        </div>
+    </form>
+</div>

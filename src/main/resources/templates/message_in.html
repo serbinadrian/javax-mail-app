@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="./../static/style/style.css">
+</head>
+<body>
+    <main>
+        <h2>
+            Message
+        </h2>
+        <div class="mail-to" id="mail-to-area" th:if="${sent == true}">
+            TO: <span th:text="${currentMessage.to}"></span>
+        </div>
+        <div class="mail-to" id="mail-from-area" th:if="${sent == false}">
+            FROM: <span th:text="${currentMessage.from}"></span>
+        </div>
+        <div class="mail-subject" id="subject-area">
+            Subject: <span th:text="${currentMessage.subject}"></span>
+        </div>
+        <div class="mail-body" id="text-area" style="background: white; height: 400px;">
+            <span th:utext="${currentMessage.HTMLcontent}"></span>
+        </div>
+        <div class="mail-attachments">
+            <div th:each="attachment : ${currentMessage.attachmentNames}">
+                <span th:text="attachment"></span>
+            </div>
+        </div>
+    </main>
+    <script src="./../static/script/att.js"></script>
+</body>
+</html>

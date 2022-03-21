@@ -1,39 +1,57 @@
 package com.serbin.javaxMail.util;
 
-import java.io.IOException;
-
-import javax.mail.BodyPart;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import javax.mail.Flags;
 import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import com.serbin.javaxMail.domains.EmailMessage;
+import org.apache.commons.mail.util.MimeMessageParser;
 
 public class MessageParser {
-    public static String getMessageBody(Message message) throws MessagingException, IOException {
-        String result = "";
-        if (message.isMimeType("text/plain")) {
-            result = message.getContent().toString();
-        } else if (message.isMimeType("multipart/*")) {
-            MimeMultipart mimeMultipart = (MimeMultipart) message.getContent();
-            result = getTextFromMimeMultipart(mimeMultipart);
+    public EmailMessage preParse(Message message, int id) {
+        var exportMessage = new EmailMessage();
+        try {
+            exportMessage.setId(id);
+            exportMessage.setFrom(((InternetAddress) message.getFrom()[0]).getAddress());
+            exportMessage.setTo(((InternetAddress)message.getRecipients(Message.RecipientType.TO)[0]).getAddress());
+            exportMessage.setSubject(message.getSubject());
+            exportMessage.setDate(message.getReceivedDate());
+            exportMessage.setFlag(message.getFlags().contains(Flags.Flag.SEEN));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return result;
+        return exportMessage;
     }
 
-    public static String getTextFromMimeMultipart(MimeMultipart mimeMultipart) throws MessagingException, IOException {
-        String result = "";
-        int count = mimeMultipart.getCount();
-        for (int i = 0; i < count; i++) {
-            BodyPart bodyPart = mimeMultipart.getBodyPart(i);
-            if (bodyPart.isMimeType("text/plain")) {
-                result = result + "\n" + bodyPart.getContent();
-                break; // without break same text appears twice in my tests
-            } else if (bodyPart.isMimeType("text/html")) {
-                String html = (String) bodyPart.getContent();
-                result = result + "\n" + org.jsoup.Jsoup.parse(html).text();
-            } else if (bodyPart.getContent() instanceof MimeMultipart) {
-                result = result + getTextFromMimeMultipart((MimeMultipart) bodyPart.getContent());
+    public EmailMessage getContent(Message message, int id) {
+        var exportMessage = preParse(message, id);
+        MimeMessageParser parser;
+        try {
+            parser = new MimeMessageParser((MimeMessage) message).parse();
+            if (parser.hasPlainContent()){
+                System.out.println("has plain");
+                exportMessage.setText(parser.getPlainContent());
             }
+            if(parser.hasHtmlContent()) {
+                System.out.println("has HTML");
+                exportMessage.setHTMLcontent(parser.getHtmlContent());
+            }
+            if(parser.hasAttachments()) {
+                System.out.println("has attachments");
+                Map<String, InputStream> map = new HashMap<>();
+                for(String cid : parser.getContentIds()){
+                    map.put(cid, parser.findAttachmentByCid(cid).getInputStream());
+                }
+                exportMessage.setAttachments(map);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return result;
+
+        return exportMessage;
     }
 }

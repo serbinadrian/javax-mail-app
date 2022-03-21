@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Javax Mailer</title>
@@ -41,7 +41,7 @@
         <span th:text="${user.email}"></span>
     </div>
 </nav>
-<main>
+<main id="main">
     <div class="menu">
         <div class="menu-items">
             <div class="menu-item active" id="inbox-switch">
@@ -160,272 +160,102 @@
                 </div>
             </div>
         </div>
-        <!--div-- class="messages">
-            <div class="message unread show">
-                <div class="email-message-content">
-                    <div class="from">
-                        test1
-                    </div>
-                    <div class="subject">
-                        test1
-                    </div>
-                    <div class="attachments">
-                        <h1>test</h1>
-                    </div>
-                </div>
-                <div class="contents-section">
-                    <div class="data-field from">
-                        <div class="data-field-name">
-                            From:
-                        </div>
-                        <div class="data-field-value">
-                            example@gmail.com
-                        </div>
-                    </div>
-                    <div class="data-field subject">
-                        <div class="data-field-name">
-                            Subject:
-                        </div>
-                        <div class="data-field-value">
-                            Some Subject
-                        </div>
-                    </div>
-                </div>
-                <div class="date-section">
-                    <div class="day">27/02/2022</div>
-                    <div class="time">07:14</div>
-                </div>
-                <div class="message-status status-read">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_2_79)">
-                            <path d="M37.4317 13.5L25.8917 2.44C24.3277 0.892492 22.2178 0.0224046 20.0176 0.0177268C17.8175 0.013049 15.7038 0.874156 14.1333 2.415L2.56667 13.5C1.75769 14.2792 1.1136 15.213 0.672681 16.246C0.231759 17.279 0.00300037 18.3902 0 19.5133L0 31.6667C0.00264643 33.876 0.88147 35.9941 2.4437 37.5563C4.00593 39.1185 6.12401 39.9974 8.33333 40H31.6667C33.876 39.9974 35.9941 39.1185 37.5563 37.5563C39.1185 35.9941 39.9973 33.876 40 31.6667V19.5133C39.9971 18.39 39.7682 17.2787 39.3269 16.2457C38.8857 15.2126 38.2412 14.2788 37.4317 13.5V13.5ZM16.465 4.79666C17.4101 3.85999 18.6883 3.33669 20.0188 3.34169C21.3494 3.34669 22.6237 3.87958 23.5617 4.82333L34.8067 15.5967L23.535 26.87C22.5822 27.7783 21.3163 28.2849 20 28.2849C18.6836 28.2849 17.4178 27.7783 16.465 26.87L5.19167 15.5967L16.465 4.79666ZM36.6667 31.6667C36.6667 32.9927 36.1399 34.2645 35.2022 35.2022C34.2645 36.1399 32.9927 36.6667 31.6667 36.6667H8.33333C7.00725 36.6667 5.73548 36.1399 4.7978 35.2022C3.86012 34.2645 3.33333 32.9927 3.33333 31.6667V19.5133C3.33501 19.1898 3.36794 18.8672 3.43167 18.55L14.1083 29.2267C15.6762 30.7792 17.7935 31.6501 20 31.6501C22.2065 31.6501 24.3238 30.7792 25.8917 29.2267L36.5683 18.55C36.6321 18.8672 36.665 19.1898 36.6667 19.5133V31.6667Z"
-                                  fill="#353535"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_2_79">
-                                <rect width="40" height="40" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                </div>
-                <div class="message-status status-unread">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_2_67)">
-                            <path d="M31.6667 1.66666H8.33333C6.12401 1.66931 4.00593 2.54813 2.4437 4.11036C0.88147 5.67259 0.00264643 7.79067 0 10L0 30C0.00264643 32.2093 0.88147 34.3274 2.4437 35.8896C4.00593 37.4519 6.12401 38.3307 8.33333 38.3333H31.6667C33.876 38.3307 35.9941 37.4519 37.5563 35.8896C39.1185 34.3274 39.9973 32.2093 40 30V10C39.9973 7.79067 39.1185 5.67259 37.5563 4.11036C35.9941 2.54813 33.876 1.66931 31.6667 1.66666V1.66666ZM8.33333 5H31.6667C32.6646 5.00196 33.6392 5.30252 34.4649 5.86301C35.2906 6.42349 35.9297 7.21824 36.3 8.145L23.5367 20.91C22.5974 21.8455 21.3257 22.3708 20 22.3708C18.6743 22.3708 17.4026 21.8455 16.4633 20.91L3.7 8.145C4.07025 7.21824 4.70935 6.42349 5.53508 5.86301C6.3608 5.30252 7.33536 5.00196 8.33333 5V5ZM31.6667 35H8.33333C7.00725 35 5.73548 34.4732 4.7978 33.5355C3.86012 32.5979 3.33333 31.3261 3.33333 30V12.5L14.1067 23.2667C15.671 24.8271 17.7904 25.7034 20 25.7034C22.2096 25.7034 24.329 24.8271 25.8933 23.2667L36.6667 12.5V30C36.6667 31.3261 36.1399 32.5979 35.2022 33.5355C34.2645 34.4732 32.9927 35 31.6667 35Z"
-                                  fill="#353535"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_2_67">
-                                <rect width="40" height="40" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                </div>
-            </div>
-            <div class="message unread show">
-                <div class="email-message-content">
-                    <div class="from">
-                        test2
-                    </div>
-                    <div class="subject">
-                        test2
-                    </div>
-                    <div class="attachments">
-                        <h1>test</h1>
-                    </div>
-                </div>
-                <div class="contents-section">
-                    <div class="data-field from">
-                        <div class="data-field-name">
-                            From:
-                        </div>
-                        <div class="data-field-value">
-                            example@gmail.com
-                        </div>
-                    </div>
-                    <div class="data-field subject">
-                        <div class="data-field-name">
-                            Subject:
-                        </div>
-                        <div class="data-field-value">
-                            Some Subject
-                        </div>
-                    </div>
-                </div>
-                <div class="date-section">
-                    <div class="day">27/02/2022</div>
-                    <div class="time">07:14</div>
-                </div>
-                <div class="message-status status-read">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_2_79)">
-                            <path d="M37.4317 13.5L25.8917 2.44C24.3277 0.892492 22.2178 0.0224046 20.0176 0.0177268C17.8175 0.013049 15.7038 0.874156 14.1333 2.415L2.56667 13.5C1.75769 14.2792 1.1136 15.213 0.672681 16.246C0.231759 17.279 0.00300037 18.3902 0 19.5133L0 31.6667C0.00264643 33.876 0.88147 35.9941 2.4437 37.5563C4.00593 39.1185 6.12401 39.9974 8.33333 40H31.6667C33.876 39.9974 35.9941 39.1185 37.5563 37.5563C39.1185 35.9941 39.9973 33.876 40 31.6667V19.5133C39.9971 18.39 39.7682 17.2787 39.3269 16.2457C38.8857 15.2126 38.2412 14.2788 37.4317 13.5V13.5ZM16.465 4.79666C17.4101 3.85999 18.6883 3.33669 20.0188 3.34169C21.3494 3.34669 22.6237 3.87958 23.5617 4.82333L34.8067 15.5967L23.535 26.87C22.5822 27.7783 21.3163 28.2849 20 28.2849C18.6836 28.2849 17.4178 27.7783 16.465 26.87L5.19167 15.5967L16.465 4.79666ZM36.6667 31.6667C36.6667 32.9927 36.1399 34.2645 35.2022 35.2022C34.2645 36.1399 32.9927 36.6667 31.6667 36.6667H8.33333C7.00725 36.6667 5.73548 36.1399 4.7978 35.2022C3.86012 34.2645 3.33333 32.9927 3.33333 31.6667V19.5133C3.33501 19.1898 3.36794 18.8672 3.43167 18.55L14.1083 29.2267C15.6762 30.7792 17.7935 31.6501 20 31.6501C22.2065 31.6501 24.3238 30.7792 25.8917 29.2267L36.5683 18.55C36.6321 18.8672 36.665 19.1898 36.6667 19.5133V31.6667Z"
-                                  fill="#353535"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_2_79">
-                                <rect width="40" height="40" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                </div>
-                <div class="message-status status-unread">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_2_67)">
-                            <path d="M31.6667 1.66666H8.33333C6.12401 1.66931 4.00593 2.54813 2.4437 4.11036C0.88147 5.67259 0.00264643 7.79067 0 10L0 30C0.00264643 32.2093 0.88147 34.3274 2.4437 35.8896C4.00593 37.4519 6.12401 38.3307 8.33333 38.3333H31.6667C33.876 38.3307 35.9941 37.4519 37.5563 35.8896C39.1185 34.3274 39.9973 32.2093 40 30V10C39.9973 7.79067 39.1185 5.67259 37.5563 4.11036C35.9941 2.54813 33.876 1.66931 31.6667 1.66666V1.66666ZM8.33333 5H31.6667C32.6646 5.00196 33.6392 5.30252 34.4649 5.86301C35.2906 6.42349 35.9297 7.21824 36.3 8.145L23.5367 20.91C22.5974 21.8455 21.3257 22.3708 20 22.3708C18.6743 22.3708 17.4026 21.8455 16.4633 20.91L3.7 8.145C4.07025 7.21824 4.70935 6.42349 5.53508 5.86301C6.3608 5.30252 7.33536 5.00196 8.33333 5V5ZM31.6667 35H8.33333C7.00725 35 5.73548 34.4732 4.7978 33.5355C3.86012 32.5979 3.33333 31.3261 3.33333 30V12.5L14.1067 23.2667C15.671 24.8271 17.7904 25.7034 20 25.7034C22.2096 25.7034 24.329 24.8271 25.8933 23.2667L36.6667 12.5V30C36.6667 31.3261 36.1399 32.5979 35.2022 33.5355C34.2645 34.4732 32.9927 35 31.6667 35Z"
-                                  fill="#353535"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_2_67">
-                                <rect width="40" height="40" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                </div>
-            </div>
-        </div-->
         <div th:if="${inboxMessages.empty}">
             <h2>no messages available yet</h2>
         </div>
-        <div class="messages">
+        <div class="messages" id="main-inbox">
             <div th:each="message : ${inboxMessages}" th:class="${message.flag} ? 'read message show' : 'unread message show'">
-                <div class="email-message-content">
-                    <div class="from">
-                        <span th:text="${message.from}"></span>
-                    </div>
-                    <div class="subject">
-                        <span th:text="${message.subject}"></span>
-                    </div>
-                    <div class="attachments">
-                        <span th:text="${message.text}"></span>
-                    </div>
-                </div>
-                <div class="contents-section">
-                    <div class="data-field from">
-                        <div class="data-field-name">
-                            From:
+                <form th:action="@{/viewMessage/{id}(id=${message.id})}" target="message-view" formmethod="get" class="mform">
+                    <div class="contents-section">
+                        <div class="data-field from">
+                            <div class="data-field-name">
+                                From:
+                            </div>
+                            <div class="data-field-value">
+                                <span th:text="${message.from}"></span>
+                            </div>
                         </div>
-                        <div class="data-field-value">
-                            <span th:text="${message.from}"></span>
-                        </div>
-                    </div>
-                    <div class="data-field subject">
-                        <div class="data-field-name">
-                            Subject:
-                        </div>
-                        <div class="data-field-value">
-                            <span th:text="${message.subject}"></span>
+                        <div class="data-field subject">
+                            <div class="data-field-name">
+                                Subject:
+                            </div>
+                            <div class="data-field-value">
+                                <span th:text="${message.subject}"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="date-section">
-                    <div class="day">
-                        <span th:text="${message.dateDay}"></span>
+                    <div class="date-section">
+                        <div class="day">
+                            <span th:text="${message.dateDay}"></span>
+                        </div>
+                        <div class="time">
+                            <span th:text="${message.dateTime}"></span>
+                        </div>
                     </div>
-                    <div class="time">
-                        <span th:text="${message.dateTime}"></span>
-                        </div-->
-                </div>
-                <div class="message-status status-read">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_2_79)">
-                            <path d="M37.4317 13.5L25.8917 2.44C24.3277 0.892492 22.2178 0.0224046 20.0176 0.0177268C17.8175 0.013049 15.7038 0.874156 14.1333 2.415L2.56667 13.5C1.75769 14.2792 1.1136 15.213 0.672681 16.246C0.231759 17.279 0.00300037 18.3902 0 19.5133L0 31.6667C0.00264643 33.876 0.88147 35.9941 2.4437 37.5563C4.00593 39.1185 6.12401 39.9974 8.33333 40H31.6667C33.876 39.9974 35.9941 39.1185 37.5563 37.5563C39.1185 35.9941 39.9973 33.876 40 31.6667V19.5133C39.9971 18.39 39.7682 17.2787 39.3269 16.2457C38.8857 15.2126 38.2412 14.2788 37.4317 13.5V13.5ZM16.465 4.79666C17.4101 3.85999 18.6883 3.33669 20.0188 3.34169C21.3494 3.34669 22.6237 3.87958 23.5617 4.82333L34.8067 15.5967L23.535 26.87C22.5822 27.7783 21.3163 28.2849 20 28.2849C18.6836 28.2849 17.4178 27.7783 16.465 26.87L5.19167 15.5967L16.465 4.79666ZM36.6667 31.6667C36.6667 32.9927 36.1399 34.2645 35.2022 35.2022C34.2645 36.1399 32.9927 36.6667 31.6667 36.6667H8.33333C7.00725 36.6667 5.73548 36.1399 4.7978 35.2022C3.86012 34.2645 3.33333 32.9927 3.33333 31.6667V19.5133C3.33501 19.1898 3.36794 18.8672 3.43167 18.55L14.1083 29.2267C15.6762 30.7792 17.7935 31.6501 20 31.6501C22.2065 31.6501 24.3238 30.7792 25.8917 29.2267L36.5683 18.55C36.6321 18.8672 36.665 19.1898 36.6667 19.5133V31.6667Z"
-                                  fill="#353535"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_2_79">
-                                <rect width="40" height="40" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                </div>
-                <div class="message-status status-unread">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_2_67)">
-                            <path d="M31.6667 1.66666H8.33333C6.12401 1.66931 4.00593 2.54813 2.4437 4.11036C0.88147 5.67259 0.00264643 7.79067 0 10L0 30C0.00264643 32.2093 0.88147 34.3274 2.4437 35.8896C4.00593 37.4519 6.12401 38.3307 8.33333 38.3333H31.6667C33.876 38.3307 35.9941 37.4519 37.5563 35.8896C39.1185 34.3274 39.9973 32.2093 40 30V10C39.9973 7.79067 39.1185 5.67259 37.5563 4.11036C35.9941 2.54813 33.876 1.66931 31.6667 1.66666V1.66666ZM8.33333 5H31.6667C32.6646 5.00196 33.6392 5.30252 34.4649 5.86301C35.2906 6.42349 35.9297 7.21824 36.3 8.145L23.5367 20.91C22.5974 21.8455 21.3257 22.3708 20 22.3708C18.6743 22.3708 17.4026 21.8455 16.4633 20.91L3.7 8.145C4.07025 7.21824 4.70935 6.42349 5.53508 5.86301C6.3608 5.30252 7.33536 5.00196 8.33333 5V5ZM31.6667 35H8.33333C7.00725 35 5.73548 34.4732 4.7978 33.5355C3.86012 32.5979 3.33333 31.3261 3.33333 30V12.5L14.1067 23.2667C15.671 24.8271 17.7904 25.7034 20 25.7034C22.2096 25.7034 24.329 24.8271 25.8933 23.2667L36.6667 12.5V30C36.6667 31.3261 36.1399 32.5979 35.2022 33.5355C34.2645 34.4732 32.9927 35 31.6667 35Z"
-                                  fill="#353535"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_2_67">
-                                <rect width="40" height="40" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                </div>
+                    <div class="message-status status-read">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_2_79)">
+                                <path d="M37.4317 13.5L25.8917 2.44C24.3277 0.892492 22.2178 0.0224046 20.0176 0.0177268C17.8175 0.013049 15.7038 0.874156 14.1333 2.415L2.56667 13.5C1.75769 14.2792 1.1136 15.213 0.672681 16.246C0.231759 17.279 0.00300037 18.3902 0 19.5133L0 31.6667C0.00264643 33.876 0.88147 35.9941 2.4437 37.5563C4.00593 39.1185 6.12401 39.9974 8.33333 40H31.6667C33.876 39.9974 35.9941 39.1185 37.5563 37.5563C39.1185 35.9941 39.9973 33.876 40 31.6667V19.5133C39.9971 18.39 39.7682 17.2787 39.3269 16.2457C38.8857 15.2126 38.2412 14.2788 37.4317 13.5V13.5ZM16.465 4.79666C17.4101 3.85999 18.6883 3.33669 20.0188 3.34169C21.3494 3.34669 22.6237 3.87958 23.5617 4.82333L34.8067 15.5967L23.535 26.87C22.5822 27.7783 21.3163 28.2849 20 28.2849C18.6836 28.2849 17.4178 27.7783 16.465 26.87L5.19167 15.5967L16.465 4.79666ZM36.6667 31.6667C36.6667 32.9927 36.1399 34.2645 35.2022 35.2022C34.2645 36.1399 32.9927 36.6667 31.6667 36.6667H8.33333C7.00725 36.6667 5.73548 36.1399 4.7978 35.2022C3.86012 34.2645 3.33333 32.9927 3.33333 31.6667V19.5133C3.33501 19.1898 3.36794 18.8672 3.43167 18.55L14.1083 29.2267C15.6762 30.7792 17.7935 31.6501 20 31.6501C22.2065 31.6501 24.3238 30.7792 25.8917 29.2267L36.5683 18.55C36.6321 18.8672 36.665 19.1898 36.6667 19.5133V31.6667Z"
+                                      fill="#353535"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_2_79">
+                                    <rect width="40" height="40" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="message-status status-unread">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_2_67)">
+                                <path d="M31.6667 1.66666H8.33333C6.12401 1.66931 4.00593 2.54813 2.4437 4.11036C0.88147 5.67259 0.00264643 7.79067 0 10L0 30C0.00264643 32.2093 0.88147 34.3274 2.4437 35.8896C4.00593 37.4519 6.12401 38.3307 8.33333 38.3333H31.6667C33.876 38.3307 35.9941 37.4519 37.5563 35.8896C39.1185 34.3274 39.9973 32.2093 40 30V10C39.9973 7.79067 39.1185 5.67259 37.5563 4.11036C35.9941 2.54813 33.876 1.66931 31.6667 1.66666V1.66666ZM8.33333 5H31.6667C32.6646 5.00196 33.6392 5.30252 34.4649 5.86301C35.2906 6.42349 35.9297 7.21824 36.3 8.145L23.5367 20.91C22.5974 21.8455 21.3257 22.3708 20 22.3708C18.6743 22.3708 17.4026 21.8455 16.4633 20.91L3.7 8.145C4.07025 7.21824 4.70935 6.42349 5.53508 5.86301C6.3608 5.30252 7.33536 5.00196 8.33333 5V5ZM31.6667 35H8.33333C7.00725 35 5.73548 34.4732 4.7978 33.5355C3.86012 32.5979 3.33333 31.3261 3.33333 30V12.5L14.1067 23.2667C15.671 24.8271 17.7904 25.7034 20 25.7034C22.2096 25.7034 24.329 24.8271 25.8933 23.2667L36.6667 12.5V30C36.6667 31.3261 36.1399 32.5979 35.2022 33.5355C34.2645 34.4732 32.9927 35 31.6667 35Z"
+                                      fill="#353535"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_2_67">
+                                    <rect width="40" height="40" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="content hide" id="sent">
-        <div class="messages">
-            <div class="message">
-                <div class="email-message-content">
-                    <div class="from">
-                        test3
-                    </div>
-                    <div class="subject">
-                        test3
-                    </div>
-                    <div class="attachments">
-                        <h1>test</h1>
-                    </div>
-                </div>
-                <div class="contents-section">
-                    <div class="data-field from">
-                        <div class="data-field-name">
-                            From:
+        <div th:if="${sentMessages.empty}">
+            <h2>no messages available yet</h2>
+        </div>
+        <div class="messages" id="sent-messages">
+            <div th:each="message : ${sentMessages}" class="message">
+                <form th:action="@{/viewSentMessage/{id}(id=${message.id})}" target="message-view" formmethod="get" class="mform">
+                    <div class="contents-section">
+                        <div class="data-field from">
+                            <div class="data-field-name">
+                                TO:
+                            </div>
+                            <div class="data-field-value">
+                                <span th:text="${message.to}"></span>
+                            </div>
                         </div>
-                        <div class="data-field-value">
-                            example@gmail.com
-                        </div>
-                    </div>
-                    <div class="data-field subject">
-                        <div class="data-field-name">
-                            Subject:
-                        </div>
-                        <div class="data-field-value">
-                            Some Subject
+                        <div class="data-field subject">
+                            <div class="data-field-name">
+                                SUBJECT:
+                            </div>
+                            <div class="data-field-value">
+                                <span th:text="${message.subject}"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="date-section">
-                    <div class="day">27/02/2022</div>
-                    <div class="time">07:14</div>
-                </div>
-            </div>
-            <div class="message">
-                <div class="email-message-content">
-                    <div class="from">
-                        test4
-                    </div>
-                    <div class="subject">
-                        test4
-                    </div>
-                    <div class="attachments">
-                        <h1>test</h1>
-                    </div>
-                </div>
-                <div class="contents-section">
-                    <div class="data-field from">
-                        <div class="data-field-name">
-                            From:
+                    <div class="date-section">
+                        <div class="day">
+                            <span th:text="${message.dateDay}"></span>
                         </div>
-                        <div class="data-field-value">
-                            example@gmail.com
+                        <div class="time">
+                            <span th:text="${message.dateTime}"></span>
                         </div>
                     </div>
-                    <div class="data-field subject">
-                        <div class="data-field-name">
-                            Subject:
-                        </div>
-                        <div class="data-field-value">
-                            Some Subject
-                        </div>
-                    </div>
-                </div>
-                <div class="date-section">
-                    <div class="day">27/02/2022</div>
-                    <div class="time">07:14</div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -434,12 +264,12 @@
     <h2>
         Message
     </h2>
-    <form action="sendCurrentMail" method="post" enctype="multipart/form-data">
+    <form action="sendCurrentMail" method="post" enctype="multipart/form-data" onsubmit="preventDefault()">
         <div class="mail-to">
-            <input type="text" name="mailTo" placeholder="To">
+            <input type="text" name="mailTo" id="recipient" placeholder="To">
         </div>
         <div class="mail-subject">
-            <input type="text" name="mailSubject" placeholder="Subject">
+            <input type="text" name="mailSubject"  id="m-subj" placeholder="Subject">
         </div>
         <div class="mail-body">
             <textarea name="mailText" id="email-input" cols="30" rows="10"></textarea>
@@ -448,7 +278,7 @@
             <input type="file" name="fileField" multiple="multiple">
         </div>
         <div class="modal-buttons">
-            <button type="submit" id="send-email">
+            <button type="submit" id="send-email" onclick="document.getElementById('loader').classList.remove('hide')">
                 SEND
             </button>
             <button id="close-write-email">
@@ -458,40 +288,42 @@
     </form>
 </div>
 <div class="look-modal hide" id="look-modal">
-    <h2>
-        Message
-    </h2>
-    <div class="mail-to" id="mail-to-area">
-        TO: example@email.com
-    </div>
-    <div class="mail-subject" id="subject-area">
-        Subject: Some subject
-    </div>
-    <div class="mail-body" id="text-area" style="background: white; height: 400px;">
-
-    </div>
-    <div class="mail-attachments">
-
-    </div>
+    <iframe src="" frameborder="0" name="message-view" style="width: 100%; height: 85%;"></iframe>
     <div class="modal-buttons">
         <button id="close-look-email">
             CLOSE
         </button>
     </div>
 </div>
-<div class="loader hide">
-    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clip-path="url(#clip0_2_202)">
-            <path d="M79.1667 4.16667H20.8333C15.31 4.17329 10.0148 6.37035 6.10925 10.2759C2.20367 14.1815 0.00661607 19.4767 0 25L0 75C0.00661607 80.5233 2.20367 85.8185 6.10925 89.7241C10.0148 93.6297 15.31 95.8268 20.8333 95.8334H79.1667C84.69 95.8268 89.9852 93.6297 93.8907 89.7241C97.7963 85.8185 99.9934 80.5233 100 75V25C99.9934 19.4767 97.7963 14.1815 93.8907 10.2759C89.9852 6.37035 84.69 4.17329 79.1667 4.16667V4.16667ZM20.8333 12.5H79.1667C81.6616 12.5049 84.098 13.2563 86.1623 14.6575C88.2266 16.0587 89.8244 18.0456 90.75 20.3625L58.8417 52.275C56.4934 54.6138 53.3142 55.927 50 55.927C46.6858 55.927 43.5065 54.6138 41.1583 52.275L9.25 20.3625C10.1756 18.0456 11.7734 16.0587 13.8377 14.6575C15.902 13.2563 18.3384 12.5049 20.8333 12.5V12.5ZM79.1667 87.5H20.8333C17.5181 87.5 14.3387 86.1831 11.9945 83.8389C9.65029 81.4947 8.33333 78.3152 8.33333 75V31.25L35.2667 58.1667C39.1776 62.0678 44.4761 64.2585 50 64.2585C55.5239 64.2585 60.8224 62.0678 64.7333 58.1667L91.6667 31.25V75C91.6667 78.3152 90.3497 81.4947 88.0055 83.8389C85.6613 86.1831 82.4819 87.5 79.1667 87.5Z"
-                  fill="white"/>
+<div class="loader hide blur" id="loader">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="iconio">
+        <g clip-path="url(#clip0_2_84)">
+            <path d="M16.4633 20.91C17.4026 21.8455 18.6743 22.3708 20 22.3708C21.3257 22.3708 22.5974 21.8455 23.5367 20.91L39.635 4.81001C39.2644 3.8833 38.6249 3.08871 37.7989 2.52852C36.9728 1.96833 35.9981 1.66817 35 1.66667H4.99999C4.00192 1.66817 3.02714 1.96833 2.20111 2.52852C1.37508 3.08871 0.735605 3.8833 0.36499 4.81001L16.4633 20.91Z"
+                  fill="url(#paint0_linear_2_84)"/>
+            <path d="M25.8933 23.2667C24.329 24.8271 22.2096 25.7034 20 25.7034C17.7904 25.7034 15.671 24.8271 14.1067 23.2667L0 9.16667V38.3333H40V9.16667L25.8933 23.2667Z"
+                  fill="url(#paint1_linear_2_84)"/>
         </g>
         <defs>
-            <clipPath id="clip0_2_202">
-                <rect width="100" height="100" fill="white"/>
+            <linearGradient id="paint0_linear_2_84" x1="20" y1="1.66667" x2="20" y2="22.3708"
+                            gradientUnits="userSpaceOnUse">
+                <stop offset="0.375" stop-color="#50439E"/>
+                <stop offset="1" stop-color="#29E0F5"/>
+            </linearGradient>
+            <linearGradient id="paint1_linear_2_84" x1="20" y1="9.16667" x2="20" y2="38.3333"
+                            gradientUnits="userSpaceOnUse">
+                <stop offset="0.375" stop-color="#50439E"/>
+                <stop offset="1" stop-color="#29E0F5"/>
+            </linearGradient>
+            <clipPath id="clip0_2_84">
+                <rect width="40" height="40" fill="white"/>
             </clipPath>
         </defs>
     </svg>
 </div>
 <script src="./../static/script/script.js"></script>
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
 </body>
 </html>

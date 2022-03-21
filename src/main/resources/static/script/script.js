@@ -27,9 +27,6 @@ window.onload = () => {
     let closeWriteEmail = document.getElementById('close-write-email');
     let closeLookEmail = document.getElementById('close-look-email');
 
-    let mailToArea = document.getElementById('mail-to-area');
-    let subjectArea = document.getElementById('subject-area');
-    let textArea = document.getElementById('text-area');
     //flags
     let unreadFlag = false;
     let sentFlag = false;
@@ -102,18 +99,24 @@ window.onload = () => {
         e.preventDefault();
         sendEmailWindow.classList.remove('hide');
         sendEmailWindow.classList.add('show');
+        clearInterval(refreshIntervalId);
+        mainfocus();
     });
 
     closeWriteEmail.addEventListener('click', (e) => {
         e.preventDefault();
         sendEmailWindow.classList.remove('show');
         sendEmailWindow.classList.add('hide');
+        refreshIntervalId = setInterval(doAjaxPost, 10000);
+        mainunfocus();
     });
 
     closeLookEmail.addEventListener('click', (e) => {
         e.preventDefault();
+        refreshIntervalId = setInterval(doAjaxPost, 5000);
         lookEmailWindow.classList.remove('show');
         lookEmailWindow.classList.add('hide');
+        mainunfocus();
     });
 
     sendEmail.disabled = sendEmail.value.length < 1
@@ -121,20 +124,102 @@ window.onload = () => {
         sendEmail.disabled = e.target.value.length < 1;
     });
 
+    function focus(param){
+        document.getElementById('main').classList.add('blur');
+        document.getElementById('loader').classList.remove('hide');
+        lookEmailWindow.classList.add('blur');
+        if(param){
+            setTimeout(unfocus, 2500);
+        }
+    }
+
+    function mainfocus(){
+        document.getElementById('main').classList.add('blur');
+    }
+
+    function mainunfocus(){
+        document.getElementById('main').classList.remove('blur');
+    }
+
+    function unfocus(){
+        document.getElementById('main').classList.remove('blur');
+        document.getElementById('loader').classList.add('hide');
+        mainfocus();
+        lookEmailWindow.classList.remove('blur');
+    }
+
     Array.prototype.forEach.call(allMessages,message => {
-        message.addEventListener('click', () => {
+        message.addEventListener('click', (e) => {
+            focus(true);
+            mainfocus();
             message.classList.remove('unread');
             message.classList.add('read');
-            mailToArea.innerHTML = message.getElementsByClassName('from')[0].innerHTML;
-            subjectArea.innerHTML = message.getElementsByClassName('subject')[0].innerHTML;
-            textArea.innerHTML = message.getElementsByClassName('attachments')[0].innerHTML;
+            message.getElementsByTagName('form')[0].submit();
             lookEmailWindow.classList.remove('hide');
             lookEmailWindow.classList.add('show');
-
+            clearInterval(refreshIntervalId);
             if(unreadFlag && !sentFlag) {
                 message.classList.add('hide');
             }
         });
     });
 
+
+    function doAjaxPost() {
+        var jsonParams = {};
+        console.log("called");
+        $.ajax({
+            type: "GET",
+            url: 'http://localhost:8084/' + "checkInbox",
+            success: function(response){
+                // we have the response
+                if(response.trim() !== 'OK') {
+                    $('#main-inbox').prepend(response);
+                    let message = document.getElementsByClassName('message')[0]
+                    message.addEventListener('click', () => {
+                        focus(true);
+                        mainfocus();
+                        message.classList.remove('unread');
+                        message.classList.add('read');
+                        message.getElementsByTagName('form')[0].submit();
+                        lookEmailWindow.classList.remove('hide');
+                        lookEmailWindow.classList.add('show');
+                        clearInterval(refreshIntervalId);
+                        if(unreadFlag && !sentFlag) {
+                            message.classList.add('hide');
+                        }
+                    })
+                } else {
+                    $.ajax({
+                        type: "GET",
+                        url: 'http://localhost:8084/' + "checkSentInbox",
+                        success: function(response){
+                            // we have the response
+                            if(response.trim() !== 'OK') {
+                                $('#sent-messages').prepend(response);
+                                let message = document.getElementById('sent-messages').getElementsByClassName('message')[0]
+                                message.addEventListener('click', () => {
+                                    focus(true);
+                                    mainfocus();
+                                    message.getElementsByTagName('form')[0].submit();
+                                    lookEmailWindow.classList.remove('hide');
+                                    lookEmailWindow.classList.add('show');
+                                    clearInterval(refreshIntervalId);
+                                });
+                            }
+                        },
+                        error: function(e){
+                            console.log('Error: ', e);
+                        }
+                    });
+                }
+            },
+            error: function(e){
+                console.log('Error: ', e);
+            }
+        });
+    }
+
+
+    var refreshIntervalId = setInterval(doAjaxPost, 5000);
 }

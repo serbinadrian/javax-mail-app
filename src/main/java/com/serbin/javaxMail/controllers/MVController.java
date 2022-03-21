@@ -1,17 +1,15 @@
 package com.serbin.javaxMail.controllers;
 
-import com.serbin.javaxMail.configs.EmailConfig;
+import com.serbin.javaxMail.domains.EmailMessage;
 import com.serbin.javaxMail.domains.FileMap;
 import com.serbin.javaxMail.domains.User;
 import com.serbin.javaxMail.services.EmailService;
-import com.serbin.javaxMail.services.FileService;
 import com.serbin.javaxMail.services.MailServiceProvider;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,34 +17,76 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 @Controller
 public class MVController {
 
     EmailService emailService = new EmailService();
-    FileService fileService = new FileService();
-    EmailConfig emailConfig = new EmailConfig();
+
     @Autowired
     MailServiceProvider mailServiceProvider;
-
+    Map<String, InputStream> map;
     User user = new User("smokgjas@gmail.com", "user");
 
     @GetMapping("/")
     String getHomePage(Model model) {
+
         model.addAttribute("user", user);
         model.addAttribute("inboxMessages", emailService.exportMessages());
+        model.addAttribute("sentMessages", emailService.exportSentMessages());
         return "index";
     }
 
-    @GetMapping("/download/file")
-    public void downloadFile(
-            @RequestParam(value = "file") String fileName,
-            HttpServletResponse response
-    ) {
-        //fileService.getFile(fileName, response);
+    @GetMapping("/viewMessage/{messageId}")
+    public String viewMessage(@PathVariable(value = "messageId") Integer messageId, Model model) {
+
+        EmailMessage emailMessage = emailService.getMessageById(messageId);
+        map = emailMessage.getAttachments();
+        model.addAttribute("currentMessage", emailMessage);
+        model.addAttribute("user", user);
+        model.addAttribute("sent", false);
+
+        return "message_in";
     }
 
+    @GetMapping("/viewSentMessage/{messageId}")
+    public String viewSentMessage(@PathVariable(value = "messageId") Integer messageId, Model model) {
+        EmailMessage emailMessage = emailService.getSentMessageById(messageId);
+        map = emailMessage.getAttachments();
+        model.addAttribute("currentMessage", emailMessage);
+        model.addAttribute("user", user);
+        model.addAttribute("sent", true);
+
+        return "message_in";
+    }
+
+    @RequestMapping(value = "/cid:{cid}", method = RequestMethod.GET)
+    public void getImageAsByteArray(HttpServletResponse response, @PathVariable(value = "cid") String cid) throws IOException {
+
+        IOUtils.copy(map.get(cid), response.getOutputStream());
+    }
+
+    @GetMapping("/checkInbox")
+    public String checkInbox(Model model, HttpServletResponse response) {
+        if(emailService.inboxUpdated()){
+            model.addAttribute("message", emailService.getInboxMessage());
+            return "incoming_message";
+        } else {
+            return "blank_response";
+        }
+    }
+
+    @GetMapping("/checkSentInbox")
+    public String checkSentInbox(Model model, HttpServletResponse response) {
+        if(emailService.sentInboxUpdated()){
+            model.addAttribute("message", emailService.getSentInboxMessage());
+            return "outcoming_message";
+        } else {
+            return "blank_response";
+        }
+    }
 
     @PostMapping("/sendCurrentMail")
     RedirectView sendMail(@RequestParam(value = "mailTo") String mailTo,
